@@ -62,7 +62,7 @@ namespace EmployeeManagement.Api.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        public async Task<ActionResult<Employee>> CreateEmployee([FromBody] Employee employee)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace EmployeeManagement.Api.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee employee)
+        public async Task<ActionResult<Employee>> UpdateEmployee(int id, [FromBody] Employee employee)
         {
             try
             {

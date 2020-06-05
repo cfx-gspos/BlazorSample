@@ -11,6 +11,8 @@ namespace BlazorServer.Pages
 {
     public class EmployeeDetailsBase : ComponentBase
     {
+        protected string Colour { get; set; } = "background-color:white";
+        public string Description { get; set; } = string.Empty;
         public Employee Employee { get; set; } = new Employee();
         protected string Coordinates { get; set; }
 
@@ -27,7 +29,7 @@ namespace BlazorServer.Pages
         }
         protected void Button_Click()
         {
-            if (ButtonText=="Hide Footer")
+            if (ButtonText == "Hide Footer")
             {
                 ButtonText = "Show Footer";
                 CssClass = "HideFooter";

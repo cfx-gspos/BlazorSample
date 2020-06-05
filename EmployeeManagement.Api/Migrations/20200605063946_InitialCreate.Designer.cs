@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmployeeManagement.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200529021428_InitialCreate")]
+    [Migration("20200605063946_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,18 +75,22 @@ namespace EmployeeManagement.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmployeeId");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Employees");
 
@@ -137,6 +141,15 @@ namespace EmployeeManagement.Api.Migrations
                             LastName = "Longway",
                             PhotoPath = "images/sara.png"
                         });
+                });
+
+            modelBuilder.Entity("EmployeeManagement.Models.Employee", b =>
+                {
+                    b.HasOne("EmployeeManagement.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

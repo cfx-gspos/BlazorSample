@@ -1,4 +1,4 @@
-﻿@page "/employeedetails/{id}"
+﻿@page "/employeedetails/{Id}"
 @page "/employeedetails"
 @inherits EmployeeDetailsBase
 @if (Employee == null )
@@ -7,6 +7,20 @@
 }
 else
 {
+<div class="row">
+    <b>Colour :</b> <input @bind="Colour" />
+
+    <div @bind-style="Colour" @bind-style:event="oninput">
+        <h3>The background colour of this text changes</h3>
+    </div>
+
+    <div>
+        <textarea @bind="Description" @bind:event="oninput" />
+    </div>
+    <div>
+        Count : @Description.Length
+    </div>
+</div>
     <div class="row justify-content-center m-3">
         <div class="col-sm-8">
             <div class="card">

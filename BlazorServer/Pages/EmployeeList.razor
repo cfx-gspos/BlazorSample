@@ -11,6 +11,9 @@
 else
 {
     <div class="card-deck">
+        <input type="checkbox" id="showFooter" @bind="ShowFooter" />
+        <label for="showFooter">Show Footer</label>
+        SelectedEmployeesCount @SelectedEmployeesCount
         @foreach (var employee in Employees)
         {
             <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
@@ -25,7 +28,14 @@ else
 
                     <a href="#" class="btn btn-danger m-1">Delete</a>
                 </div>
+
+                <DisplayEmployee Employee="employee" ShowFooter="ShowFooter" OnEmployeeSelection="EmployeeSelectionChanged">
+                </DisplayEmployee>
+                bbb
             </div>
+
+
+
         }
 
     </div>
