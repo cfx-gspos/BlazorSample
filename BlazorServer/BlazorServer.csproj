@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmployeeManagement.Models\EmployeeManagement.Models.csproj" />
+    <ProjectReference Include="..\STRazor.Components\STRazor.Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>

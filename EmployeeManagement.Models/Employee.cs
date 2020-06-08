@@ -9,7 +9,7 @@ namespace EmployeeManagement.Models
     public class Employee
     {
         public int EmployeeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "写名字")]
         [MinLength(2)]
         public string FirstName { get; set; }
         [Required]

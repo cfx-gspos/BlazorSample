@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Models",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAssembly", "BlazorWebAssembly\BlazorWebAssembly.csproj", "{C4BDEBA2-ECC3-43FC-987F-9AA328CCCBDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STRazor.Components", "STRazor.Components\STRazor.Components.csproj", "{513D118C-1237-43A4-9FD2-29C5079D4A0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C4BDEBA2-ECC3-43FC-987F-9AA328CCCBDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4BDEBA2-ECC3-43FC-987F-9AA328CCCBDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4BDEBA2-ECC3-43FC-987F-9AA328CCCBDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513D118C-1237-43A4-9FD2-29C5079D4A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513D118C-1237-43A4-9FD2-29C5079D4A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513D118C-1237-43A4-9FD2-29C5079D4A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513D118C-1237-43A4-9FD2-29C5079D4A0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

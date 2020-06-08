@@ -18,13 +18,13 @@ namespace BlazorServer.Services
         }
         public async Task<Employee> GetEmployee(int id)
         {
-            System.Threading.Thread.Sleep(15000);
+      
             return await httpClient.GetJsonAsync<Employee>($"api/employees/{id}");
         }
 
         public async Task<IEnumerable<Employee>> GetEmployees()
         {
-            System.Threading.Thread.Sleep(15000);
+         
             return await httpClient.GetJsonAsync<Employee[]>("api/employees");
         }
     }
