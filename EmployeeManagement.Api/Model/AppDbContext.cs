@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,49 @@ namespace EmployeeManagement.Api.Model
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerHistory> CustomerHistories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            var customerID = Guid.NewGuid().ToString();
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer
+                {
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = "",
+                    ID = customerID,
+                    IsDeleted = false,
+                    Name = "IHP"
+                ,
+                    ShipTo = "Wan Zai",
+                    To = "Ivan Wan Zai",
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = "",
+                }
+                );
+            modelBuilder.Entity<CustomerHistory>().HasData(
+                new CustomerHistory
+                {
+                    CustomerID = customerID,
+                    CreatedAt = DateTime.Now,
+                    ID = Guid.NewGuid().ToString(),
+                    IsDeleted = false,
+                    YearlyManDayCost = 4565,
+                    YearlyManDayDiscountedCost = 4560,
+                    CreatedBy = "Frank",
+                    StartDate = DateTime.Now,
+                    EndDate = DateTime.Now.AddYears(1),
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = "",
+                }
+                );
 
             //Seed Departments Table
             modelBuilder.Entity<Department>().HasData(

@@ -1,0 +1,26 @@
+﻿@page "/customers"
+@using System.ComponentModel
+<h1>Customers</h1>
+@if (CustomerList != null)
+{
+    <Table DataSource="@CustomerList" ClientSide>
+        <Column @bind-Field="context.Name"></Column>
+        <Column @bind-Field="context.To">
+            @((MarkupString)context.To)
+        </Column>
+        <Column @bind-Field="context.ShipTo">
+            @((MarkupString)context.ShipTo)
+        </Column>
+        <Column @bind-Field="context.CustomerHistories">
+            @foreach (var customerHistory in context.CustomerHistories)
+            {
+                <Card Bordered="true">
+                    <Tag Color="green">     @customerHistory.StartDate.ToString("yyyy/MM/dd")</Tag>
+                    <Tag Color="red">    @customerHistory.EndDate.ToString("yyyy/MM/dd")</Tag>
+                    @customerHistory.YearlyManDayCost
+                    @customerHistory.YearlyManDayDiscountedCost
+                </Card>
+            }
+        </Column>
+    </Table>
+}
