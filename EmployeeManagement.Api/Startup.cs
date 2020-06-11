@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EmployeeManagement.Api.Model;
 using EmployeeManagement.Api.Models;
 using Microsoft.AspNetCore.Builder;
@@ -33,6 +34,7 @@ namespace EmployeeManagement.Api
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

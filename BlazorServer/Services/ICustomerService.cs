@@ -9,5 +9,7 @@ namespace BlazorServer.Services
     public interface ICustomerService
     {
         Task<IEnumerable<Customer>> GetCustomers();
+        Task<Customer> GetCustomer(string id);
+        Task<bool> SaveCustomer(Customer customer);
     }
 }

@@ -24,6 +24,18 @@ namespace EmployeeManagement.Api.Controllers
         {
             return await customerRepository.GetCustomers();
         }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<Customer> GetCustomer(string id)
+        {
+            return await customerRepository.GetCustomer(id);
+        }
 
+        [HttpPut]
+        [Route("{SaveCustomer}")]
+        public async Task<bool> SaveCustomer(Customer customer)
+        {
+            return await customerRepository.SaveCustomer(customer);
+        }
     }
 }
