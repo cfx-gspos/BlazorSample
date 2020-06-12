@@ -16,6 +16,19 @@ namespace EmployeeManagement.Api.Model
             this.appDbContext = appDbContext;
         }
 
+        public async Task<bool> DeleteCustomer(string id)
+        {
+            var customer = await appDbContext.Customers.FirstOrDefaultAsync(x => x.ID == id);
+            customer.IsDeleted = true;
+            var customerHistories = await appDbContext.CustomerHistories.Where(x => x.CustomerID == id).ToListAsync();
+            foreach (var customerHistory in customerHistories)
+            {
+                customerHistory.IsDeleted = true;
+            }
+            appDbContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<Customer> GetCustomer(string id)
         {
             return await appDbContext.Customers.Include(c => c.CustomerHistories).FirstOrDefaultAsync(x => x.ID == id);
@@ -23,12 +36,12 @@ namespace EmployeeManagement.Api.Model
 
         public async Task<IEnumerable<Customer>> GetCustomers()
         {
-            return await appDbContext.Customers.Include(c => c.CustomerHistories).ToListAsync();
+            return await appDbContext.Customers.Include(c => c.CustomerHistories).Where(x=>!x.IsDeleted).ToListAsync();
         }
 
         public async Task<bool> SaveCustomer(Customer customer)
         {
-            if (customer.ID!=null)
+            if (customer.ID != null)
             {
                 //Update Customer
                 var oldCustomer = appDbContext.Customers.FirstOrDefault(x => x.ID == customer.ID);

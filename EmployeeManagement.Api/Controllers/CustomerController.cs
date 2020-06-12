@@ -37,5 +37,11 @@ namespace EmployeeManagement.Api.Controllers
         {
             return await customerRepository.SaveCustomer(customer);
         }
+        [HttpPost]
+        [Route("{delete}")]
+        public async Task<bool> DeleteCustomer(string id)
+        {
+            return await customerRepository.DeleteCustomer(id);
+        }
     }
 }

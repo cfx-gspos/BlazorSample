@@ -8,9 +8,9 @@ namespace EmployeeManagement.Api.Model
 {
     public interface ICustomerRepository
     {
-          Task<IEnumerable<Customer>> GetCustomers();
+        Task<IEnumerable<Customer>> GetCustomers();
         Task<Customer> GetCustomer(string id);
         Task<bool> SaveCustomer(Customer customer);
-
+        Task<bool> DeleteCustomer(string id);
     }
 }

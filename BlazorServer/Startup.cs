@@ -26,21 +26,30 @@ namespace BlazorServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+         
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddHttpClient<IEmployeeService, EmployeeService>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:44392");
-            });
-            services.AddHttpClient<IDepartmentServce, DepartmentService>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:44392");
-            });
-            services.AddHttpClient<ICustomerService, CustomerService>(client =>
-            {
-                client.BaseAddress = new Uri("https://localhost:44392");
-            });
+
             services.AddAntDesign();
+
+            //services.AddHttpClient<IEmployeeService, EmployeeService>(client =>
+            //{
+            //    client.BaseAddress = new Uri("https://localhost:44392");
+            //});
+            //services.AddHttpClient<IDepartmentServce, DepartmentService>(client =>
+            //{
+
+            //    client.BaseAddress = new Uri("https://localhost:44392");
+
+            //});
+            //services.AddScoped<ICustomerService, CustomerService>();
+            //services.AddHttpClient<ICustomerService, CustomerService>(client =>
+            //{
+            //    if (client.BaseAddress == null)
+            //    {
+            //        client.BaseAddress = new Uri("https://localhost:44392");
+            //    }
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

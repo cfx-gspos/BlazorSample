@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\Customers\Customers.razor.bak" />
+    <None Remove="Pages\Customers\Customers.razor.cs.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Pages\Customers\Customers.razor.cs.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\Customers\Customers.razor.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EmployeeManagement.Models\EmployeeManagement.Models.csproj" />
     <ProjectReference Include="..\STRazor.Components\STRazor.Components.csproj" />
   </ItemGroup>
@@ -14,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AntDesign" Version="0.1.0-nightly-200609155213" />
+    <PackageReference Include="AntDesign" Version="0.1.0-nightly-200610140050" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
   </ItemGroup>

@@ -1,16 +1,22 @@
 ﻿@page "/customers"
-@page "/"
+
 @using System.ComponentModel
+@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+
+@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+
+
+
+
 <h1>Customers</h1>
 @inject ModalService _modalService
 <div class="row">
     <div class="col col-md-12">
         <Button Type="primary" style="margin:10px;float:right;" OnClick="@(()=> { editModalVisible = true;BindCustomer(null); })">New Customer</Button>
     </div>
-    
 </div>
-
-
 <Table DataSource="@CustomerList" ClientSide Total="CustomerList.Count()" PageSize="100">
     <Column @bind-Field="context.Name"></Column>
     <Column @bind-Field="context.To">
@@ -34,33 +40,41 @@
         }
     </Column>
     <Column TData="string" Title="Action">
-        <Button Type="primary" OnClick="@(()=> { editModalVisible = true;BindCustomer(context.ID); })"> Edit</Button>
-        <Button Danger Type="primary"> Delete</Button>
+        <Icon Type="edit" OnClick="@(()=> { editModalVisible = true;BindCustomer(context.ID); })"></Icon>
+        <Icon Type="delete" OnClick="@(()=> {
+                                                             Action<MouseEventArgs> onOk = (e) => {DeleteCustomer(context.ID);};
+
+_modalService.Confirm(new ConfirmOptions()
+{
+Title="Confirmation" ,
+Icon=icon,
+Content="Do you want to delete this item?" ,
+OnOk=new EventCallback<MouseEventArgs>(this, onOk)   ,
+OnCancel =null
+});
+})"></Icon>
     </Column>
 </Table>
-
-<Modal Title="@("Edit Customer")"
+<Modal Title="@( (EditCustomer.ID==null?"Create":"Edit")+" Customer")"
        Visible="@(editModalVisible)"
        OnCancel="@(()=> { editModalVisible = false; })"
        Width="900"
        Closable="true"
        OnOk="SaveCustomer"
        MaskClosable="false">
-
-
     <Form Model="@EditCustomer"
-          LabelCol="new ColLayoutParam { Span = 8 }"
-          WrapperCol="new ColLayoutParam { Span = 16 }">
+          LabelCol="new ColLayoutParam { Span = 4 }"
+          WrapperCol="new ColLayoutParam { Span = 20 }">
+
         <FormItem Label="Name">
-            <Input @bind-Value="EditCustomer.Name" />
+            <Input @bind-Value="EditCustomer.Name"></Input>
         </FormItem>
         <FormItem Label="To">
-            <TextArea @bind-Value="EditCustomer.To" />
+            <TextArea @bind-Value="EditCustomer.To"></TextArea>
         </FormItem>
         <FormItem Label="Ship To">
-            <TextArea @bind-Value="EditCustomer.ShipTo" />
+            <TextArea @bind-Value="EditCustomer.ShipTo"></TextArea>
         </FormItem>
-
         <FormItem Label="Yearly Manday Details">
             <Row>
                 <Col Span="2" Offset="22">
@@ -91,6 +105,7 @@
 _modalService.Confirm(new ConfirmOptions()
 {
 Title="Confirmation" ,
+Icon=icon,
 Content="Do you want to delete this item?" ,
 OnOk=new EventCallback<MouseEventArgs>(this, onOk)   ,
 OnCancel =null
@@ -101,8 +116,9 @@ OnCancel =null
                 </Table>
             }
         </FormItem>
-
     </Form>
-
-
 </Modal>
+
+@code{
+    RenderFragment icon =@<Icon Type="exclamation-circle" Theme="outline"></Icon>;
+}

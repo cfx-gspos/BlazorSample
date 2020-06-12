@@ -19,11 +19,11 @@ namespace BlazorServer.Pages
         public string DepartmentId { get; set; }
         [Parameter]
         public string Id { get; set; }
-        protected async override Task OnInitializedAsync()
-        {
-            Employee = await EmployeeService.GetEmployee(int.Parse(Id));
-            Departments = (await DepartmentServce.GetDepartments()).ToList();
-            DepartmentId = Employee.DepartmentId.ToString();
-        }
+        //protected async override Task OnInitializedAsync()
+        //{
+        //    Employee = await EmployeeService.GetEmployee(int.Parse(Id));
+        //    Departments = (await DepartmentServce.GetDepartments()).ToList();
+        //    DepartmentId = Employee.DepartmentId.ToString();
+        //}
     }
 }

@@ -8,58 +8,80 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using AntDesign;
+using System.Text.Json;
+using Microsoft.AspNetCore.Components.Forms;
+
 namespace BlazorServer.Pages.Customers
 {
+
     public partial class Customers : ComponentBase
     {
-        protected bool editModalVisible { get; set; } = false;
-        protected Customer EditCustomer { get; set; }
-        [Inject]
 
+
+
+        protected Customer EditCustomer = new Customer { };
+
+        [Required]
+        public string TESTNAME { get; set; }
+        public bool TestVisible { get; set; } = false;
+        protected bool editModalVisible { get; set; } = false;
+
+        [Inject]
         private ICustomerService CustomerService { get; set; }
         [Inject]
-        private MessageService messageService { get; set; }
+        private MessageService MessageService { get; set; }
 
         IEnumerable<Customer> CustomerList { get; set; } = new List<Customer>();
         protected async override Task OnInitializedAsync()
         {
-            EditCustomer = new Customer { };
-            CustomerList = await CustomerService.GetCustomers();
-        }
-
-        protected async void BindCustomer(string id)
-        {
-            if (id != null)
-            {
-                EditCustomer = await CustomerService.GetCustomer(id);
-            }
-            else
-            {
-                EditCustomer = new Customer { ID = null };
-                EditCustomer.CustomerHistories = new List<CustomerHistory>();
-            }
+            //CustomerList = await CustomerService.GetCustomers();
 
             StateHasChanged();
         }
-        protected void AddYearlyManday()
+
+        async void BindCustomer(string id)
+        {
+            if (id != null)
+            {
+                var tmpEditCustomer = await CustomerService.GetCustomer(id);
+                tmpEditCustomer.CopyProperties(EditCustomer);
+            }
+            else
+            {
+                var tmpEditCustomer = new Customer { ID = null };
+                tmpEditCustomer.CustomerHistories = new List<CustomerHistory>();
+                tmpEditCustomer.CopyProperties(EditCustomer);
+            }
+            StateHasChanged();
+        }
+
+        void AddYearlyManday()
         {
             EditCustomer.CustomerHistories.Add(new CustomerHistory { ID = Guid.NewGuid().ToString(), CustomerID = EditCustomer.ID });
         }
-        protected void DeleteYearlyManday(string id)
+
+        void DeleteYearlyManday(string id)
         {
             EditCustomer.CustomerHistories.Remove(EditCustomer.CustomerHistories.FirstOrDefault(x => x.ID == id));
         }
-        protected async void SaveCustomer()
+
+        async void SaveCustomer()
         {
             var result = await CustomerService.SaveCustomer(EditCustomer);
             CustomerList = await CustomerService.GetCustomers();
             editModalVisible = false;
+            MessageService.Success("Save customer successfully!");
             StateHasChanged();
-            messageService.Success("Save customer successfully!");
         }
-        async Task PageIndexChanged(PaginationEventArgs args)
-        {
 
+        async void DeleteCustomer(string id)
+        {
+            var resut = await CustomerService.DeleteCustomer(id);
+            if (resut)
+            {
+                CustomerList = await CustomerService.GetCustomers();
+                StateHasChanged();
+            }
         }
     }
 }

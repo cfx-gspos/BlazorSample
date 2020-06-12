@@ -17,6 +17,11 @@ namespace BlazorServer.Services
             this.httpClient = httpClient;
         }
 
+        public async Task<bool> DeleteCustomer(string id)
+        {
+            return await httpClient.PostJsonAsync<bool>($@"/api/customer/delete?id={id}", null);
+        }
+
         public async Task<Customer> GetCustomer(string id)
         {
             return await httpClient.GetJsonAsync<Customer>($@"/api/customer/{id}");
